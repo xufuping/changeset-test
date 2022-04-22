@@ -4,6 +4,7 @@ packages/*/dist/
 /dist
 coverage
 temp
+/build
 
 # local env files
 .env.local
