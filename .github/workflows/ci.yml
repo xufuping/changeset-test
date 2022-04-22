@@ -34,20 +34,12 @@ jobs:
       - name: Test
         run: yarn test
 
-      - name: Create .npmrc
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ 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 }}
-
       - name: Release snapshot
         run: |
           npx changeset version --snapshot
           npx changeset publish --tag canary
         env:
-          GITHUB_TOKEN: ${{ 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 }}
+          GITHUB_TOKEN: ${{ secrets.XUQINGFENG }}
 
       - name: Post published version to GitHub checks
         run: |
@@ -55,4 +47,4 @@ jobs:
           version=$(jq -r .version package.json)
           npx action-status --context=$name --state=success --description=$version --url="https://unpkg.com/$name@$version/"
         env:
-          GITHUB_TOKEN: ${{ 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 }}
+          GITHUB_TOKEN: ${{ secrets.XUQINGFENG }}
